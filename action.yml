@@ -1,0 +1,5 @@
+name: "My Hello World Action"
+descripion: "A Rust program that prints "Hello, world!" when executed"
+ runs:
+   using: "docker"
+   image: "Dockerfile"
