@@ -1,5 +1,19 @@
-name: "My Hello World Action"
-descripion: "A Rust program that prints "Hello, world!" when executed"
- runs:
-   using: "docker"
-   image: "Dockerfile"
+name: Fibbot
+author: Nyengka Prosper
+description: My Rust application(bot(fibbot))
+branding:  
+  icon: align-left
+  color: blue
+inputs:
+  args:
+    description: Arguments passed to `fibbot`
+    required: true
+    default: ''
+outputs:
+  results:
+    description: The results from calling `fibbot`
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+  - ${{ inputs.args }}
