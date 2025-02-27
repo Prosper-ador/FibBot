@@ -4,7 +4,7 @@ description: My Rust application(bot(fibbot))
 branding:  
   icon: align-left
   color: blue
-args:
+input:
   enable_fib:
     description: Arguments passed to `fibbot` to enable fibonacci calculation
     required: false
