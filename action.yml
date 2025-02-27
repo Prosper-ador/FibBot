@@ -21,6 +21,6 @@ runs:
   image: "Dockerfile"
  # args:
  # - ${{ inputs.args }}
-branding:
-  icon: "hash"
-  color: "green"
+#branding:
+#  icon: "hash"
+#  color: "green"
