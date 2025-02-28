@@ -12,8 +12,8 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  args:
-    - ${{ inputs.number }}
+  #args:
+  #  - ${{ inputs.number }}
 branding:
   icon: "activity"
   color: "blue"
