@@ -24,4 +24,4 @@ WORKDIR /fibo
 COPY --from=builder /fibo/target/x86_64-unknown-linux-musl/release/fibbot /fibo/target/release/fibbot
 
 # Set the command to run the binary(executable) on container startup
-CMD [ "./target/release/fibbot" ]
+CMD [ "./fibo/target/release/fibbot" ]
