@@ -3,7 +3,7 @@ name: Fibbot
 on: [push, pull_request]
 
 jobs:
-  check:  # Any action can contain multiple jobs
+  test-action:  
     runs-on: ubuntu-latest  # OS on which the job runs
     steps:  # Each job consists in a series of steps
     - name: Checkout repository # Clone git repository
