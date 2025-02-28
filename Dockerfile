@@ -37,4 +37,4 @@ COPY . .
 RUN cargo build --release
 
 # Build the Rust project in release mode with static linking
-CMD [ "./target/releasefibbot" ]
+CMD [ "./target/release/fibbot" ]
