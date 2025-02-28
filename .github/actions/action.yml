@@ -1,22 +1,36 @@
-name: "FibBot Action"
+name: "FibBot"
 description: "My Rust application(bot(fibbot))"
-author: " Nyengka Prosper"
+author: "Nyengka Prosper"
+
 inputs:
-  number:
-    description: "The Fibonacci number to compute"
+  pr_number:
+    description: "The number of the pull request"
     required: true
-    default: "10"
-outputs:
-  result:
-    description: "The computed Fibonacci number"
+  enable_fib:
+    description: "Enable Fibonacci calculation (true/false)"
+    required: false
+    default: "true"
+  max_threshold:
+    description: "Max threshold for Fibonacci calculation"
+    required: false
+    default: "100"
+  github_token:
+    description: "GitHub token to interact with GitHub API"
+    required: true
+
 runs:
   using: "composite"
   steps:
     - name: Build FibBot
       run: cargo build --release
       shell: bash
+
     - name: Run FibBot
       run: |
+        export PR_NUMBER="${{ inputs.pr_number }}"
+        export GITHUB_TOKEN="${{ inputs.github_token }}"
+        ./target/release/fibbot "${{ inputs.enable_fib }}" "${{ inputs.max_threshold }}"
+      shell: bash
 branding:
   icon: "activity"
   color: "blue"
