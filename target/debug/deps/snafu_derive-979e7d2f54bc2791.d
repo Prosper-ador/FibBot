@@ -1,0 +1,9 @@
+/home/nyengka-prosper/projects/rust_projects/fibbot/target/debug/deps/libsnafu_derive-979e7d2f54bc2791.so: /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/lib.rs /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/parse.rs /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/shared.rs /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/report.rs /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/report/yes_async.rs
+
+/home/nyengka-prosper/projects/rust_projects/fibbot/target/debug/deps/snafu_derive-979e7d2f54bc2791.d: /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/lib.rs /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/parse.rs /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/shared.rs /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/report.rs /home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/report/yes_async.rs
+
+/home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/lib.rs:
+/home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/parse.rs:
+/home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/shared.rs:
+/home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/report.rs:
+/home/nyengka-prosper/.cargo/registry/src/index.crates.io-6f17d22bba15001f/snafu-derive-0.7.5/src/report/yes_async.rs:
