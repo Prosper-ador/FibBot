@@ -16,7 +16,7 @@ branding:
 runs:
   using: "docker"
   image: "Dockerfile"
-  entrypoint: ./fibbot
+  entrypoint: ./target/release/fibbot
   
 
 
