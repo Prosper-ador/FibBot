@@ -4,6 +4,16 @@ FROM rust:latest AS builder
 # Set the working directory in the container
 WORKDIR /fibo
 
+# Install musl-gcc and rustup
+RUN apt-get update && \
+    apt-get install -y musl-dev musl-tools && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install the musl target triplet for Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+    source $HOME/.cargo/env && \
+    rustup target add x86_64-unknown-linux-musl
+
 # Copy the Cargo manifest files to cache dependencies
 COPY Cargo.toml Cargo.lock ./
 
@@ -11,7 +21,7 @@ COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 
 # Build the Rust project in release mode with static linking
-RUN rustup target add x86_64-unknown-linux-musl
+#RUN rustup target add x86_64-unknown-linux-musl
 RUN cargo build --release --target x86_64-unknown-linux-musl
 
 # Use the scratch image for the final stage
