@@ -10,10 +10,13 @@ outputs:
   result:
     description: "The computed Fibonacci number"
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  #args:
-  #  - ${{ inputs.number }}
+  using: "composite"
+  steps:
+    - name: Build FibBot
+      run: cargo build --release
+      shell: bash
+    - name: Run FibBot
+      run: |
 branding:
   icon: "activity"
   color: "blue"
