@@ -20,7 +20,8 @@ FROM scratch
 # Set the working directory in the container
 WORKDIR /fibo
 
-# Copy the built binary from the builder stageCOPY --from=builder /fibo/target/x86_64-unknown-linux-musl/release/fibbot fibbot
+# Copy the built binary from the builder stage
+COPY --from=builder /fibo/target/x86_64-unknown-linux-musl/release/fibbot fibbot
 
 # Set the command to run the binary(executable) on container startup
 CMD [ "./fibbot" ]
