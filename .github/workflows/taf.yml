@@ -13,4 +13,4 @@ jobs:
       run: cargo check  # Run the `cargo check` command
     
     - name: Run Fibbot
-      uses: ./fibbot
+      uses: ./
