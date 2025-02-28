@@ -11,16 +11,9 @@ inputs:
     default: "true"
   max_threshold:
     description: Other argument to set maximum number allowed for fibonacci calculation
-    required: true
+    required: false
     default: "1000"
-#outputs:
-#  results:
-#    description: The results from calling `fibbot`
 runs:
   using: "docker"
   image: "Dockerfile"
- # args:
- # - ${{ inputs.args }}
-#branding:
-#  icon: "hash"
-#  color: "green"
+
