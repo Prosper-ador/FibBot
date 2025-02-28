@@ -1,21 +1,27 @@
-name: "FibBot CI"
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
+    types: [opened, synchronize]
+
 permissions:
   pull-requests: write
   contents: read
 
 jobs:
-  run-action:
+  run-fibbot:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run FibBot Action
+      - name: Run FibBot
         uses: /Prosper-ador/FibBot/@main
+        with:
+          pr_number: ${{ github.event.pull_request.number }}
+          enable_fib: "true"
+          max_threshold: "100"
+          github_token: ${{ secrets.GITHUB_TOKEN }}  
