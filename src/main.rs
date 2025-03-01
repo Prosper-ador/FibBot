@@ -34,6 +34,5 @@ async fn main() {
 }
 mod test;
 mod fib;
-use regex::Regex;
 use test::get_num::extract_numbers;
 use crate::fib::fibonacci;
