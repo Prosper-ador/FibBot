@@ -73,15 +73,15 @@ pub async fn get_request_calc_and_comment() -> Result<String, Box<dyn std::error
     for num in &numbers {
         let fib_value = fibonacci(*num);
         println!("Number: {} → Fibonacci({}) = {}", num, num, fib_value);
-        results.push(format!("Fibonacci({}) = {}", num, fib_value));
+        results.push(format!("- Fibonacci({}) = {}", num, fib_value));
     }
 
     //let response = format!("### Extracted Numbers & Fibonacci \n{}", results.join("\n"));
     //println!("### Extracted Numbers & Fibonacci \n");
-
+    
     //Ok(results.join("\n"))
     let comment_body = format!(
-        "### 🤖 Fibonacci PR Scanner Bot 🤖\n\
+        "### Fibonacci PR Scanner Bot \n\
          Extracted Numbers: `{:?}`\n\n\
          {}\n\n\
          Generated automatically by FibBot_",
@@ -94,6 +94,6 @@ pub async fn get_request_calc_and_comment() -> Result<String, Box<dyn std::error
         .create_comment(pr_number, comment_body.clone())
         .await?;
 
-    println!("✅ Comment posted successfully!");
+    println!("Comment posted successfully!");
     Ok(comment_body)
 }
