@@ -3,6 +3,9 @@ name: "Run FibBot"
 on:
   pull_request:
     types: [opened, synchronize, closed]
+  push:
+    branches:
+      - main
  
 permissions:
       pull-requests: write
@@ -13,12 +16,6 @@ permissions:
 jobs:
   run-fibbot:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: write
-  branches:
-        - main
     steps:
       
       - name: Checkout repository
