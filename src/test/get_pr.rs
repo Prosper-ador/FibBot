@@ -30,10 +30,19 @@ use crate::{fib::fibonacci, test::get_num::extract_numbers};
 pub async fn get_request_calc_and_comment() -> Result<String, Box<dyn std::error::Error>> {
     let github_token = env::var("GITHUB_TOKEN").expect("Missing GITHUB_TOKEN");
     let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
-    let pr_number: u64 = env::var("GITHUB_PR_NUMBER")
-        .expect("Missing GITHUB_PR_NUMBER")
-        .parse()
-        .expect("Invalid PR number");
+    let pr_number = match env::var("GITHUB_PR_NUMBER") {
+        Ok(value) => match value.parse::<u64>() {
+            Ok(num) => num,
+            Err(_) => {
+                eprintln!("❌ Invalid PR number: '{}'. Expected a positive integer.", value);
+                std::process::exit(1); // Gracefully exit with an error code
+            }
+        },
+        Err(_) => {
+            eprintln!("❌ Missing GITHUB_PR_NUMBER. Please set it before running.");
+            std::process::exit(1);
+        }
+    };
 
     let (owner, repo_name) = repo
         .split_once('/')
