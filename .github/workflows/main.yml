@@ -33,13 +33,6 @@ jobs:
           max_threshold: "1000"
           github_token: ${{ secrets.GITHUB_TOKEN }}
         env:
-          GITHUB_PR_NUMBER: ${{ env.GITHUB_PR_NUMBER }}  # Pass the env variable to the actio
-          
-      - name: Comment on PR
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const comment = require("./comment.js");
-            await comment.commentOnPR(context);
+          GITHUB_PR_NUMBER: ${{ env.GITHUB_PR_NUMBER }}  # Pass the env variable to the action
 
             
