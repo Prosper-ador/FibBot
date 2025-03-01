@@ -1,18 +1,36 @@
-name: "FibBot CI"
+name: "Run FibBot"
+
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
+    types: [opened, synchronize, closed]
+ 
+permissions:
+      pull-requests: write
+      contents: write
+
 
 jobs:
-  run-action:
+  run-fibbot:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+  branches:
+        - main
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      
+      - name: Set PR number in the environment
+        run: echo "GITHUB_PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
-      - name: Run FibBot Action
-        uses: ./
+      - name: Run FibBot
+        uses: Prosper-ador/FibBot@main
+        with:
+          enable_fib: "true"
+          max_threshold: "1000"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_PR_NUMBER: ${{ env.GITHUB_PR_NUMBER }}  # Pass the env variable to the action
+
+            
