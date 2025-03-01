@@ -2,15 +2,15 @@ name: "Run FibBot"
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, closed]
   push:
-    branches:
-      - main
-      - Fibbot
-
+      branches:
+        - main
+        - Fibbot
 permissions:
-  pull-requests: write
-  contents: read
+      pull-requests: write
+      contents: write
+
 
 jobs:
   run-fibbot:
