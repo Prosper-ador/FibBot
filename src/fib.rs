@@ -1,5 +1,5 @@
 use num_bigint::{BigInt, ToBigInt};
-fn fibonacci(n: u64) -> BigInt {
+pub fn fibonacci(n: u64) -> BigInt {
     if n <= 1 {
         return n.to_bigint().unwrap();
     }
