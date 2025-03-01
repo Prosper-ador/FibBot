@@ -15,7 +15,7 @@ async fn main() {
     println!("Max Threshold: {}", max_threshold);
     println!("PR Number: {}", pr_number);
 
-    match get_request_calc_and_comment(env::var("GITHUB_PR_NUMBER").unwrap().parse().unwrap()).await {
+    match get_request_calc_and_comment().await {
         Ok(result) => println!("{}", result),
         Err(e) => eprintln!("Error: {}", e),
     }
