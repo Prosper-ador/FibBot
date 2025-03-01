@@ -6,6 +6,7 @@ inputs:
   pr_number:
     description: "The number of the pull request"
     required: true
+    default: "1"
   enable_fib:
     description: "Enable Fibonacci calculation (true/false)"
     required: false
@@ -13,7 +14,7 @@ inputs:
   max_threshold:
     description: "Max threshold for Fibonacci calculation"
     required: false
-    default: "100"
+    default: "1000"
   github_token:
     description: "GitHub token to interact with GitHub API"
     required: true
