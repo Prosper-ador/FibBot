@@ -7,11 +7,20 @@ async fn request() {
     let github_token = env::var("GITHUB_TOKEN").expect("Missing GITHUB_TOKEN");
     let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
     let owner = repo.split('/').next().unwrap();
-    let pr_number: u64 = env::var("GITHUB_PR_NUMBER")
-        .expect("Missing GITHUB_PR_NUMBER")
-        .parse()
-        .unwrap();
-
+    let pr_number = match env::var("GITHUB_PR_NUMBER") {
+        Ok(value) => match value.parse::<u64>() {
+            Ok(num) => num,
+            Err(_) => {
+                eprintln!("Invalid PR number: '{}'. Expected a positive integer.", value);
+                std::process::exit(1); // Gracefully exit with an error code
+            }
+        },
+        Err(_) => {
+            eprintln!("Missing GITHUB_PR_NUMBER. Please set it before running.");
+            std::process::exit(1);
+        }
+    };
+    
     let octocrab = Octocrab::builder().personal_token(github_token).build().unwrap();
 
     let comments_url = format!("/repos/{owner}/{repo}/pulls/{pr_number}");
@@ -27,22 +36,14 @@ use std::env;
 use octocrab::Octocrab;
 use crate::{fib::fibonacci, test::get_num::extract_numbers};
 
-pub async fn get_request_calc_and_comment() -> Result<String, Box<dyn std::error::Error>> {
+pub async fn get_request_calc_and_comment(pr_number: u64) -> Result<String, Box<dyn std::error::Error>> {
     let github_token = env::var("GITHUB_TOKEN").expect("Missing GITHUB_TOKEN");
     let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
-    let pr_number = match env::var("GITHUB_PR_NUMBER") {
-        Ok(value) => match value.parse::<u64>() {
-            Ok(num) => num,
-            Err(_) => {
-                eprintln!("Invalid PR number: '{}'. Expected a positive integer.", value);
-                std::process::exit(1); // Gracefully exit with an error code
-            }
-        },
-        Err(_) => {
-            eprintln!("Missing GITHUB_PR_NUMBER. Please set it before running.");
-            std::process::exit(1);
-        }
-    };
+    let pr_number: u64 = env::var("GITHUB_PR_NUMBER")
+        .expect("Missing GITHUB_PR_NUMBER")
+        .parse::<u64>()
+        .unwrap();
+
 
     let (owner, repo_name) = repo
         .split_once('/')

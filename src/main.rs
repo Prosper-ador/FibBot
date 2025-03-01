@@ -10,43 +10,16 @@ async fn main() {
         .unwrap_or_else(|_| "1000".to_string())
         .parse()
         .unwrap_or(1000);
-    
+    let pr_number: u64 = env::var("GITHUB_PR_NUMBER").expect("msg").parse().unwrap();
     println!("Enable Fibonacci: {}", enable_fib);
     println!("Max Threshold: {}", max_threshold);
+    println!("PR Number: {}", pr_number);
 
-    let pr_number = match env::var("GITHUB_PR_NUMBER") {
-        Ok(value) => match value.parse::<u64>() {
-            Ok(num) => num,
-            Err(_) => {
-                eprintln!("Invalid PR number: '{}'. Expected a positive integer.", value);
-                std::process::exit(1); // Gracefully exit with an error code
-            }
-        },
-        Err(_) => {
-            eprintln!("Missing GITHUB_PR_NUMBER. Please set it before running.");
-            std::process::exit(1);
-        }
-    };
-
-    let text = "The numbers are 0.12+4, 46, and 78.";
-    let numbers = extract_numbers(text);
-    println!("{:?}", numbers); 
-
-    for i in 0..numbers.len() {
-                
-        let b = numbers.get(i);
-        println!("number: {}", b.unwrap());
-    
-        let a = fibonacci(*b.unwrap());
-        println!("fibonacci({}) = {}", b.unwrap(), a);
-    }
-
-    match get_request_calc_and_comment().await {
+    match get_request_calc_and_comment(env::var("GITHUB_PR_NUMBER").unwrap().parse().unwrap()).await {
         Ok(result) => println!("{}", result),
         Err(e) => eprintln!("Error: {}", e),
     }
 }
 mod test;
 mod fib;
-use test::get_num::extract_numbers;
-use crate::fib::fibonacci;
+

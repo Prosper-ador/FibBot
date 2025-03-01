@@ -1,11 +1,19 @@
+name: "Run FibBot"
+
 on:
   pull_request:
     types: [opened, synchronize]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR Number to Process"
+        required: false
+        default: "2"
   push:
     branches:
       - main
-      - FibBot
-  
+      - Fibbot
+
 permissions:
   pull-requests: write
   contents: read
@@ -16,16 +24,22 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      repository-projects: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-          
+
       - name: Run FibBot
         uses: Prosper-ador/FibBot@main
         with:
-          pr_number: ${{ github.event.pull_request.number || 1 }}
           enable_fib: "true"
           max_threshold: "1000"
-          github_token: ${{ secrets.GITHUB_TOKEN }}  
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ github.event.pull_request.number }}
+          
+      - name: Comment on PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const comment = require("./comment.js");
+            await comment.commentOnPR(context);
