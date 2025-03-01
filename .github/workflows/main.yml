@@ -6,7 +6,6 @@ on:
   push:
       branches:
         - main
-        - Fibbot
 permissions:
       pull-requests: write
       contents: write
