@@ -39,12 +39,21 @@ use crate::{fib::fibonacci, test::get_num::extract_numbers};
 pub async fn get_request_calc_and_comment() -> Result<String, Box<dyn std::error::Error>> {
     let github_token = env::var("GITHUB_TOKEN").expect("Missing GITHUB_TOKEN");
     let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
-    let pr_number: u64 = env::var("GITHUB_PR_NUMBER")
-        .expect("Missing GITHUB_PR_NUMBER")
-        .parse::<u64>()
-        .unwrap();
+    let args: Vec<String> = env::args().collect();
 
+    // Expecting the first argument (after the binary name) to be the PR number.
+    if args.len() < 2 || args[1].trim().is_empty() {
+        eprintln!("Missing PR number argument.");
+        std::process::exit(1);
+    }
 
+    let pr_number: u64 = args[1].trim().parse().expect("Invalid PR number");
+    println!("PR Number from argument: {}", pr_number);
+
+    // Optionally, read from environment if needed.
+    let env_pr = env::var("GITHUB_PR_NUMBER").unwrap_or_default();
+    println!("PR Number from env: {}", env_pr);
+    
     let (owner, repo_name) = repo
         .split_once('/')
         .expect("Invalid GITHUB_REPOSITORY format");
