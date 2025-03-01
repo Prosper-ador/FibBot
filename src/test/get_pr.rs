@@ -34,12 +34,12 @@ pub async fn get_request_calc_and_comment() -> Result<String, Box<dyn std::error
         Ok(value) => match value.parse::<u64>() {
             Ok(num) => num,
             Err(_) => {
-                eprintln!("❌ Invalid PR number: '{}'. Expected a positive integer.", value);
+                eprintln!("Invalid PR number: '{}'. Expected a positive integer.", value);
                 std::process::exit(1); // Gracefully exit with an error code
             }
         },
         Err(_) => {
-            eprintln!("❌ Missing GITHUB_PR_NUMBER. Please set it before running.");
+            eprintln!("Missing GITHUB_PR_NUMBER. Please set it before running.");
             std::process::exit(1);
         }
     };
@@ -72,9 +72,9 @@ pub async fn get_request_calc_and_comment() -> Result<String, Box<dyn std::error
     //Ok(results.join("\n"))
     let comment_body = format!(
         "### 🤖 Fibonacci PR Scanner Bot 🤖\n\
-         📌 **Extracted Numbers:** `{:?}`\n\n\
+         Extracted Numbers: `{:?}`\n\n\
          {}\n\n\
-         🚀 _Generated automatically by FibBot_",
+         Generated automatically by FibBot_",
         numbers, results.join("\n")
     );
 
