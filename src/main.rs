@@ -10,7 +10,7 @@ async fn main() {
         .unwrap_or_else(|_| "1000".to_string())
         .parse()
         .unwrap_or(1000);
-    let pr_number: u64 = env::var("GITHUB_PR_NUMBER").expect("msg").parse().unwrap();
+    let pr_number: u64 = env::var("GITHUB_PR_NUMBER").expect("Missing GITHUB_PR_NUMBER").parse().unwrap();
     println!("Enable Fibonacci: {}", enable_fib);
     println!("Max Threshold: {}", max_threshold);
     println!("PR Number: {}", pr_number);
