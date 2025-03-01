@@ -5,12 +5,7 @@ on:
     branches:
       - main
       - FibBot
-  workflow_dispatch:
-    inputs:
-      pr_number:
-        description: "PR Number to Process"
-        required: false
-        default: "2"
+  
 permissions:
   pull-requests: write
   contents: read
@@ -26,16 +21,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: Set PR Number Environment Variable
-        run: |
-          if [[ -n "${{ github.event.inputs.pr_number }}" ]]; then
-            echo "PR_NUMBER=${{ github.event.inputs.pr_number }}" >> $GITHUB_ENV
-          else
-            echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          fi
-        shell: bash
-      
+          
       - name: Run FibBot
         uses: Prosper-ador/FibBot@main
         with:

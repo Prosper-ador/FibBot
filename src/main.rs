@@ -10,6 +10,12 @@ async fn main() {
         .unwrap_or_else(|_| "1000".to_string())
         .parse()
         .unwrap_or(1000);
+    let pr_number: u64 = env::var("PR_NUMBER")
+        .expect("PR_NUMBER not set")
+        .parse::<u64>()
+        .expect("Invalid PR_NUMBER");
+
+    println!("the pull_request number is: {}",pr_number);
 
     println!("Enable Fibonacci: {}", enable_fib);
     println!("Max Threshold: {}", max_threshold);
