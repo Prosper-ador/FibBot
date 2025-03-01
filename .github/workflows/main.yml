@@ -3,7 +3,7 @@ name: "Run FibBot"
 on:
   pull_request:
     types: [opened, synchronize, closed]
-  push:
+ 
 permissions:
       pull-requests: write
       contents: write
@@ -15,7 +15,8 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-
+  branches:
+        - main
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
