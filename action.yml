@@ -3,10 +3,6 @@ description: "My Rust application(bot(fibbot))"
 author: "Nyengka Prosper"
 
 inputs:
-  pr_number:
-    description: "The number of the pull request"
-    required: true
-    default: "1"
   enable_fib:
     description: "Enable Fibonacci calculation (true/false)"
     required: false
@@ -18,6 +14,10 @@ inputs:
   github_token:
     description: "GitHub token to interact with GitHub API"
     required: true
+  pr_number:
+    description: "The number of the pull request"
+    required: true
+    default: "1"
 
 runs:
   using: "composite"
@@ -29,9 +29,9 @@ runs:
     - name: Run FibBot
       run: |
         export PR_NUMBER="${{ inputs.pr_number }}"
-        export GITHUB_TOKEN="${{ inputs.github_token }}"
         export ENABLE_FIB="${{ inputs.enable_fib }}"
-        ./target/release/fibbot "${{ inputs.pr_number }}" "${{ inputs.enable_fib }}" "${{ inputs.max_threshold }}"
+        export GITHUB_TOKEN="${{ inputs.github_token }}"
+        ./target/release/fibbot "${{ inputs.enable_fib }}" "${{ inputs.max_threshold }}" "${{ inputs.pr_number }}" "${{ inputs.github_token }}" 
       shell: bash
 branding:
   icon: "activity"
